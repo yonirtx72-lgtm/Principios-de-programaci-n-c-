@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C++ MASTER // Academia</title>
+
+<style>
+:root{
+    --bg:#070808;
+    --panel:#101213;
+    --panel2:#151819;
+    --border:#252a2c;
+    --text:#f4f7f8;
+    --muted:#899194;
+    --cyan:#00e5ff;
+    --purple:#9b5cff;
+    --green:#00ff9d;
+    --red:#ff4d6d;
+    --yellow:#ffd166;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:
+        radial-gradient(circle at 15% 10%,#00e5ff0b,transparent 30%),
+        radial-gradient(circle at 85% 80%,#9b5cff0a,transparent 30%),
+        var(--bg);
+    color:var(--text);
+    font-family:Arial,Helvetica,sans-serif;
+    overflow-x:hidden;
+}
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.15;
+    background-image:
+        linear-gradient(#fff 1px,transparent 1px),
+        linear-gradient(90deg,#fff 1px,transparent 1px);
+    background-size:50px 50px;
+    z-index:-1;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    height:70px;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
+    background:#080909dd;
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+}
+
+.logo{
+    font-weight:900;
+    font-size:21px;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:var(--cyan);
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.xp{
+    color:var(--green);
+    font-size:13px;
+    font-weight:bold;
+}
+
+.menuBtn{
+    display:none;
+    background:none;
+    color:white;
+    border:1px solid var(--border);
+    padding:8px 12px;
+    border-radius:8px;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    position:fixed;
+    top:70px;
+    left:0;
+    bottom:0;
+    width:240px;
+    padding:25px 15px;
+    background:#0b0c0d;
+    border-right:1px solid var(--border);
+    overflow-y:auto;
+    z-index:900;
+}
+
+.sidebar h4{
+    color:#555d60;
+    font-size:11px;
+    letter-spacing:2px;
+    margin:15px 12px 10px;
+}
+
+.sidebar a{
+    display:block;
+    text-decoration:none;
+    color:#858d90;
+    padding:10px 12px;
+    border-radius:8px;
+    font-size:13px;
+    margin-bottom:3px;
+    transition:.2s;
+}
+
+.sidebar a:hover{
+    color:var(--cyan);
+    background:#00e5ff0b;
+}
+
+/* ================= MAIN ================= */
+
+main{
+    margin-left:240px;
+    padding-top:70px;
+}
+
+section{
+    max-width:1150px;
+    margin:auto;
+    padding:90px 30px;
+}
+
+.hero{
+    min-height:calc(100vh - 70px);
+    display:flex;
+    align-items:center;
+}
+
+.heroContent{
+    max-width:850px;
+}
+
+.status{
+    display:inline-block;
+    padding:8px 14px;
+    border:1px solid #00e5ff44;
+    border-radius:30px;
+    color:var(--cyan);
+    font-size:12px;
+    letter-spacing:2px;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:clamp(55px,9vw,110px);
+    line-height:.85;
+    letter-spacing:-6px;
+    margin-bottom:30px;
+}
+
+.hero h1 span{
+    color:transparent;
+    -webkit-text-stroke:1px var(--cyan);
+}
+
+.hero p{
+    color:var(--muted);
+    font-size:18px;
+    max-width:650px;
+}
+
+.buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+
+.btn{
+    padding:14px 22px;
+    border-radius:9px;
+    border:0;
+    background:var(--cyan);
+    color:#001014;
+    font-weight:bold;
+    cursor:pointer;
+    text-decoration:none;
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 30px #00e5ff33;
+}
+
+.btn.dark{
+    background:var(--panel2);
+    color:white;
+    border:1px solid var(--border);
+}
+
+/* ================= TITLES ================= */
+
+.kicker{
+    color:var(--cyan);
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:3px;
+}
+
+.title{
+    font-size:42px;
+    margin:7px 0;
+}
+
+.subtitle{
+    color:var(--muted);
+}
+
+/* ================= STATS ================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-top:40px;
+}
+
+.stat{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:22px;
+}
+
+.stat strong{
+    font-size:28px;
+    display:block;
+    color:var(--cyan);
+}
+
+.stat span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* ================= ROADMAP ================= */
+
+.roadmap{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:12px;
+    margin-top:35px;
+}
+
+.road{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:18px;
+    transition:.25s;
+}
+
+.road:hover{
+    transform:translateY(-5px);
+    border-color:#00e5ff55;
+}
+
+.road b{
+    color:var(--cyan);
+    font-size:12px;
+}
+
+.road h3{
+    margin:7px 0;
+}
+
+.road p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* ================= SEARCH ================= */
+
+.search{
+    width:100%;
+    padding:16px 18px;
+    margin:30px 0;
+    border-radius:10px;
+    border:1px solid var(--border);
+    outline:none;
+    background:var(--panel);
+    color:white;
+    font-size:15px;
+}
+
+.search:focus{
+    border-color:var(--cyan);
+}
+
+/* ================= LESSON ================= */
+
+.lesson{
+    background:linear-gradient(145deg,#ffffff06,transparent),var(--panel);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:27px;
+    margin-bottom:18px;
+}
+
+.lessonNum{
+    color:var(--cyan);
+    font-family:monospace;
+    font-size:12px;
+}
+
+.lesson h3{
+    font-size:25px;
+    margin:5px 0 10px;
+}
+
+.lesson p{
+    color:#aeb5b7;
+    margin-bottom:15px;
+}
+
+.code{
+    position:relative;
+}
+
+pre{
+    background:#050606;
+    border:1px solid #202526;
+    border-radius:10px;
+    padding:20px;
+    overflow:auto;
+    color:#d9e5e8;
+    font-family:Consolas,monospace;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.copy{
+    position:absolute;
+    top:8px;
+    right:8px;
+    background:#171b1c;
+    border:1px solid #303638;
+    color:#aaa;
+    border-radius:7px;
+    padding:6px 10px;
+    cursor:pointer;
+}
+
+.complete{
+    margin-top:15px;
+    padding:10px 15px;
+    border:1px solid #00ff9d33;
+    background:#00ff9d0b;
+    color:var(--green);
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* ================= PROGRESS ================= */
+
+.progressBox{
+    background:var(--panel);
+    border:1px solid var(--border);
+    padding:25px;
+    border-radius:15px;
+}
+
+.progressTop{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+}
+
+.bar{
+    height:10px;
+    background:#25292a;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.fill{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,var(--cyan),var(--purple));
+    transition:.5s;
+}
+
+/* ================= LAB ================= */
+
+.lab{
+    background:#090a0a;
+    border:1px solid #00e5ff33;
+    border-radius:17px;
+    overflow:hidden;
+}
+
+.labHead{
+    padding:18px 20px;
+    background:#0e1112;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+}
+
+.labHead span{
+    color:var(--green);
+    font-family:monospace;
+}
+
+textarea{
+    width:100%;
+    min-height:300px;
+    resize:vertical;
+    border:0;
+    outline:none;
+    background:#050606;
+    color:#d9e5e8;
+    padding:20px;
+    font-family:Consolas,monospace;
+    font-size:14px;
+}
+
+.labControls{
+    padding:15px;
+    display:flex;
+    gap:10px;
+}
+
+.output{
+    border-top:1px solid var(--border);
+    padding:20px;
+    color:var(--green);
+    min-height:60px;
+    font-family:monospace;
+}
+
+/* ================= QUIZ ================= */
+
+.quiz{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:25px;
+}
+
+.question{
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+.answers{
+    display:grid;
+    gap:10px;
+}
+
+.answer{
+    padding:13px;
+    text-align:left;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background:var(--panel2);
+    color:white;
+    cursor:pointer;
+}
+
+.answer:hover{
+    border-color:var(--cyan);
+}
+
+#quizResult{
+    margin-top:20px;
+    font-weight:bold;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    margin-left:240px;
+    padding:50px;
+    text-align:center;
+    color:#555;
+    border-top:1px solid var(--border);
+}
+
+footer b{
+    color:var(--cyan);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.3s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .menuBtn{
+        display:block;
+    }
+
+    main{
+        margin-left:0;
+    }
+
+    footer{
+        margin-left:0;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero h1{
+        letter-spacing:-4px;
+    }
+}
+
+@media(max-width:500px){
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    section{
+        padding:65px 18px;
+    }
+
+    .title{
+        font-size:32px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        C<span>++</span> MASTER
+    </div>
+
+    <div class="header-right">
+        <div class="xp">
+            ⚡ <span id="xp">0</span> XP
+        </div>
+
+        <button class="menuBtn" onclick="toggleMenu()">
+            ☰
+        </button>
+    </div>
+
+</header>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <h4>NAVEGACIÓN</h4>
+
+    <a href="#inicio">⌂ Inicio</a>
+    <a href="#ruta">◈ Roadmap</a>
+    <a href="#curso">▣ Curso</a>
+    <a href="#laboratorio">⚗ Laboratorio</a>
+    <a href="#quiz">◆ Quiz</a>
+    <a href="#retos">★ Retos</a>
+
+    <h4>FUNDAMENTOS</h4>
+
+    <a href="#curso">01 Variables</a>
+    <a href="#curso">02 Operadores</a>
+    <a href="#curso">03 Condicionales</a>
+    <a href="#curso">04 Bucles</a>
+    <a href="#curso">05 Funciones</a>
+
+    <h4>INTERMEDIO</h4>
+
+    <a href="#curso">06 Arrays</a>
+    <a href="#curso">07 Strings</a>
+    <a href="#curso">08 Vector</a>
+    <a href="#curso">09 Punteros</a>
+    <a href="#curso">10 Referencias</a>
+
+    <h4>POO</h4>
+
+    <a href="#curso">11 Struct</a>
+    <a href="#curso">12 Clases</a>
+    <a href="#curso">13 Constructores</a>
+    <a href="#curso">14 Herencia</a>
+    <a href="#curso">15 Polimorfismo</a>
+
+    <h4>AVANZADO</h4>
+
+    <a href="#curso">16 STL</a>
+    <a href="#curso">17 Templates</a>
+    <a href="#curso">18 Lambdas</a>
+    <a href="#curso">19 Smart Pointers</a>
+    <a href="#curso">20 Threads</a>
+
+</aside>
+
+
+<main>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="inicio">
+
+    <div class="heroContent">
+
+        <div class="status">
+            ● SISTEMA ONLINE // C++ ACADEMY
+        </div>
+
+        <h1>
+            DOMINA<br>
+            <span>C++</span>
+        </h1>
+
+        <p>
+            Una ruta completa para aprender programación en C++:
+            desde tu primer programa hasta memoria, POO, STL,
+            templates y programación moderna.
+        </p>
+
+        <div class="buttons">
+
+            <a class="btn" href="#curso">
+                COMENZAR
+            </a>
+
+            <a class="btn dark" href="#laboratorio">
+                ABRIR LABORATORIO
+            </a>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong>50+</strong>
+                <span>CONCEPTOS</span>
+            </div>
+
+            <div class="stat">
+                <strong id="statLessons">20</strong>
+                <span>LECCIONES</span>
+            </div>
+
+            <div class="stat">
+                <strong>∞</strong>
+                <span>PRÁCTICA</span>
+            </div>
+
+            <div class="stat">
+                <strong id="level">1</strong>
+                <span>NIVEL</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ROADMAP ================= -->
+
+<section id="ruta">
+
+    <div class="kicker">
+        ROADMAP
+    </div>
+
+    <h2 class="title">
+        Tu camino en C++
+    </h2>
+
+    <p class="subtitle">
+        No necesitas aprenderlo todo de golpe.
+        Avanza de una etapa a la siguiente.
+    </p>
+
+    <div class="roadmap">
+
+        <div class="road">
+            <b>01 — BASIC</b>
+            <h3>Fundamentos</h3>
+            <p>Variables, tipos, entrada, salida y sintaxis.</p>
+        </div>
+
+        <div class="road">
+            <b>02 — LOGIC</b>
+            <h3>Lógica</h3>
+            <p>Operadores, if, switch y condiciones.</p>
+        </div>
+
+        <div class="road">
+            <b>03 — FLOW</b>
+            <h3>Bucles</h3>
+            <p>for, while y do while.</p>
+        </div>
+
+        <div class="road">
+            <b>04 — CODE</b>
+            <h3>Funciones</h3>
+            <p>Divide y organiza tus programas.</p>
+        </div>
+
+        <div class="road">
+            <b>05 — DATA</b>
+            <h3>Estructuras</h3>
+            <p>Arrays, strings, vector, map y set.</p>
+        </div>
+
+        <div class="road">
+            <b>06 — MEMORY</b>
+            <h3>Memoria</h3>
+            <p>Punteros, referencias, stack y heap.</p>
+        </div>
+
+        <div class="road">
+            <b>07 — OOP</b>
+            <h3>POO</h3>
+            <p>Clases, objetos, herencia y polimorfismo.</p>
+        </div>
+
+        <div class="road">
+            <b>08 — ADVANCED</b>
+            <h3>C++ moderno</h3>
+            <p>Templates, lambdas, RAII y concurrencia.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROGRESO ================= -->
+
+<section>
+
+    <div class="progressBox">
+
+        <div class="progressTop">
+
+            <b>PROGRESO GENERAL</b>
+
+            <span id="progressText">
+                0%
+            </span>
+
+        </div>
+
+        <div class="bar">
+            <div class="fill" id="fill"></div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CURSO ================= -->
+
+<section id="curso">
+
+    <div class="kicker">
+        CURSO
+    </div>
+
+    <h2 class="title">
+        Biblioteca de C++
+    </h2>
+
+    <p class="subtitle">
+        Aprende concepto por concepto.
+    </p>
+
+    <input
+        class="search"
+        id="search"
+        placeholder="🔎 Buscar: punteros, clases, vector..."
+    >
+
+
+<!-- 01 -->
+
+<article class="lesson">
+
+<span class="lessonNum">01 // SINTAXIS</span>
+
+<h3>Tu primer programa</h3>
+
+<p>
+C++ comienza normalmente desde la función
+<code>main()</code>. La biblioteca iostream permite
+mostrar información en pantalla.
+</p>
+
+<div class="code">
+
+<button class="copy" onclick="copyCode(this)">
+Copiar
+</button>
+
+<pre><code>#include &lt;iostream&gt;
+
+int main() {
+
+    std::cout &lt;&lt; "Hola mundo";
+
+    return 0;
+}</code></pre>
+
+</div>
+
+<button class="complete" onclick="completeLesson(this)">
+✓ Marcar como aprendido
+</button>
+
+</article>
+
+
+<!-- 02 -->
+
+<article class="lesson">
+
+<span class="lessonNum">02 // VARIABLES</span>
+
+<h3>Variables y tipos de datos</h3>
+
+<p>
+Una variable almacena información. Los tipos comunes
+incluyen int, double, char, bool y string.
+</p>
+
+<div class="code">
+
+<button class="copy" onclick="copyCode(this)">
+Copiar
+</button>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+int main() {
+
+    int edad = 15;
+    double precio = 99.99;
+    char letra = 'A';
+    bool activo = true;
+    std::string nombre = "Yoni";
+
+    std::cout &lt;&lt; nombre;
+
+    return 0;
+}</code></pre>
+
+</div>
+
+<button class="complete" onclick="completeLesson(this)">
+✓ Marcar como aprendido
+</button>
+
+</article>
+
+
+<!-- 03 -->
+
+<article class="lesson">
+
+<span class="lessonNum">03 // OPERADORES</span>
+
+<h3>Operadores matemáticos</h3>
+
+<p>
+Puedes realizar operaciones utilizando +, -, *, / y %.
+</p>
+
+<div class="code">
+
+<button class="copy" onclick="copyCode(this)">
+Copiar
+</button>
+
+<pre><code>int a = 10;
+int b = 3;
+
+std::cout &lt;&lt; a + b;
+std::cout &lt;&lt; a - b;
+std::cout &lt;&lt; a * b;
+std::cout &lt;&lt; a / b;
+std::cout &lt;&lt; a % b;</code></pre>
+
+</div>
+
+<button class="complete" onclick="completeLesson(this)">
+✓ Marcar como aprendido
+</button>
+
+</article>
+
+
+<!-- 04 -->
+
+<article class="lesson">
+
+<span class="lessonNum">04 // CONDICIONALES</span>
+
+<h3>if, else if y else</h3>
+
+<p>
+Permiten tomar decisiones dependiendo del estado de
+una condición.
+</p>
+
+<div class="code">
+
+<button class="copy" onclick="copyCode(this)">
+Copiar
+</button>
+
+<pre><code>int edad;
+
+std::cin &gt;&gt; edad;
+
+if (edad &gt;= 18) {
+
+    std::cout &lt;&lt; "Mayor de edad";
+
+} else {
+
+    std::cout &lt;&lt; "Menor de edad";
+
+}</code></pre>
+
+</div>
+
+<button class="complete" onclick="completeLesson(this)">
+✓ Marcar como aprendido
+</button>
+
+</article>
+
+
+<!-- 05 -->
+
+<article class="lesson">
+
+<span class="lessonNum">05 // SWITCH</span>
+
+<h3>Crear menús</h3>
+
+<p>
+Switch resulta útil cuando tienes varias opciones
+posibles.
+</p>
+
+<div class="code">
+
+<button class="copy" onclick="copyCode(this)">
+Copiar
+</button>
+
+<pre><code>int opcion;
+
+std::cin &gt;&gt; opcion;
+
+switch(opcion) {
+
+    case 1:
+        std::cout &lt;&lt; "Jugar";
+        break;
+
+    case 2:
+        std::cout &lt;&lt; "Configuracion";
+        break;
+
+    default:
+        std::cout &lt;&lt; "Invalido";
+
+}</code></pre>
+
+</div>
+
+<button class="complete" onclick="completeLesson(this)">
+✓ Marcar como aprendido
+</button>
+
+</article>
+
+
+<!-- 06 -->
+
+<article class="lesson">
+
+<span class="lessonNum">06 // BUCLES</span>
+
+<h3>for</h3>
+
+<p>
+Los bucles permiten repetir instrucciones varias veces.
+</p>
+
+<div class="code">
+
+<button class="copy" onclick="copyCode(this)">
+Copiar
+</button>
+
+<pre><code>for(int i = 1; i &lt;= 10; i++) {
+
+    std::cout &lt;&lt; i &lt;&lt; "\n";
+
+}</code></pre>
+
+</div>
+
+<button class="complete" onclick="completeLesson(this)">
+✓ Marcar como aprendido
+</button>
+
+</article>
+
+
+<!-- 07 -->
+
+<article class="lesson">
+
+<span class="lessonNum">07 // FUNCIONES</span>
+
+<h3>Crear funciones</h3>
+
+<p>
+Una función permite reutilizar código.
+</p>
+
+<div class="code">
+
+<button class="copy" onclick="copyCode(this)">
+Copiar
+</button>
+
+<pre><code>int sumar(int a, int b) {
+
+    return a + b;
+
+}
+
+int main() {
+
+    int resultado = sumar(5, 7);
+
+    std::cout &lt;&lt; resultado;
+
+}</code></pre>
+
+</div>
+
+<button class="complete" onclick="completeLesson(this)">
+✓ Marcar como aprendido
+</button>
+
+</article>
+
+
+<!-- 08 -->
+
+<article class="lesson">
+
+<span class="lessonNum">08 // ARRAYS</span>
+
+<h3>Arrays</h3>
+
+<p>
+Un array almacena varios elementos del mismo tipo.
+</p>
+
+<div class="code">
+
+<button class="copy" onclick="copyCode(this)">
+Copiar
+</button>
+
+<pre><code>int numeros[5] = {
+    10, 20, 30, 40, 50
+};
+
+std::cout &lt;&lt; numeros[0];</code></pre>
+
+</div>
+
+<button class="complete" onclick="completeLesson(this)">
+✓ Marcar como aprendido
+</button>
+
+</article>
+
+
+<!-- 09 -->
+
+<article class="lesson">
+
+<span class="lessonNum">09 // STRING</span>
+
+<h3>Texto</h3>
+
+<p>
+std::string permite trabajar fácilmente con cadenas.
+</p>
+
+<div class="code">
+
+<button class="copy" onclick="copyCode(this)">
+Copiar
+</button>
+
+<pre><code>#include &lt;string&gt;
+
+std::string nombre = "Yoni";
+
+std::cout &lt;&lt; nombre;
+
+std::cout &lt;&lt; nombre.length();</code></pre>
+
+</div>
+
+<button class="complete" onclick="completeLesson(this)">
+✓ Marcar como aprendido
+</button>
+
+</article>
+
+
+<!-- 10 -->
+
+<article class="lesson">
+
+<span class="lessonNum">10 // VECTOR</span>
+
+<h3>std::vector</h3>
+
+<p>
+Vector es un contenedor dinámico de la biblioteca estándar.
+</p>
+
+<div class="code">
+
+<button class="copy" onclick="copyCode(this)">
+Copiar
+</button>
+
+<pre><code>#include &lt;vector&gt;
+
+std::vector&lt;int&gt; numeros;
+
+numeros.push_back(10);
+numeros.push_back(20);
+numeros.push_back(30);
+
+for(int n : numeros) {
+
+    std::cout &lt;&lt; n &lt;&lt; "\n";
+
+}</code></pre>
+
+</div>
+
+<button class="complete" onclick="completeLesson(this)">
+✓ Marcar como aprendido
+</button>
+
+</article>
+
+
+<!-- 11 -->
+
+<article class="lesson">
+
+<span class="lessonNum">11 // REFERENCIAS</span>
+
+<h3>Referencias</h3>
+
+<p>
+Una referencia es otro nombre pa
